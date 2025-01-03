@@ -23,33 +23,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-
-  // let res = Array(3).fill(Array(3).fill(0));
-  // for (let i = 0; i < matrix.length; i++) { //столбик
-  //   for (let j = 0; j < matrix[0].length; j++) { //строчка
-  //     if (matrix[i][j]) {
-  //       res[j][i] = 1;
-        // if (i - 1 > 0 && j - 1 > 0 && matrix[i - 1][j - 1] === false) res[i - 1][j - 1] += 1;
-        // if (i - 1 > 0 && matrix[i - 1][j] === false) res[i - 1][j] += 1;
-        // if (i - 1 > 0 && j + 1 < matrix[0].length && matrix[i - 1][j + 1] === false) res[i - 1][j + 1] += 1;
-        // if (j - 1 > 0 && matrix[i][j - 1] === false) res[i][j - 1] += 1;
-        // if (j + 1 < matrix[0].length && matrix[i][j + 1] === false) res[i][j + 1] += 1;
-        // if (i + 1 < matrix.length && j - 1 > 0 && matrix[i + 1][j - 1] === false) res[i + 1][j - 1] += 1;
-        // if (i + 1 < matrix.length &&  matrix[i + 1][j] === false) res[i + 1][j] += 1;
-        // if (i + 1 < matrix.length && j + 1 < matrix[0].length && matrix[i + 1][j + 1] === false) res[i + 1][j + 1] += 1;
-  //     }
-  //   }
-  // }
-  // return res;
+function minesweeper(matrix) {
+  let res = matrix.map((el) => el.map((item) => 0));
+  for (var i = 0; i < matrix.length; i++) {
+    for (var j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j]) {
+        res[i][j] = 1;
+        if (j + 1 <= matrix[0].length && matrix[i][j + 1] === false) res[i][j+1] += 1;
+        if (i + 1 <= matrix.length && j - 1 >= 0 && matrix[i + 1][j - 1] === false) res[i + 1][j - 1] += 1;
+        if (i + 1 <= matrix.length &&  matrix[i + 1][j] === false) res[i + 1][j] += 1;
+        if (i + 1 <= matrix.length && j + 1 <= matrix[0].length && matrix[i + 1][j + 1] === false) res[i + 1][j + 1] += 1;
+        if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] === false) res[i - 1][j - 1] += 1;
+        if (i - 1 >= 0 && matrix[i - 1][j] === false) res[i - 1][j] += 1;
+        if (i - 1 >= 0 && j + 1 <= matrix[0].length && matrix[i - 1][j + 1] === false) res[i - 1][j + 1] += 1;
+        if (j - 1 >= 0 && matrix[i][j - 1] === false) res[i][j - 1] += 1;
+      }
+    }
+  }
+  return res;
 }
 
 module.exports = {
   minesweeper
 };
 
-// matrix = [[true, false, false],[false, true, false],[false, false, false]];
+matrix = [[true, false, false],[false, true, false],[false, false, false]];
 
-// console.log(minesweeper(matrix));
+console.log(minesweeper(matrix));
