@@ -29,13 +29,9 @@ function renameFiles(names) {
     counters[names[i]] = num;
     ans.push(folderName);
   }
-  console.log('folders:', folders);
-  console.log('counters:', counters);
-    return ans;
+  return ans;
 }
 
 module.exports = {
   renameFiles
 };
-
-console.log(renameFiles(["file", "file", "image", "file(1)", "file"]));
